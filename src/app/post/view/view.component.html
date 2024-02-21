@@ -1,0 +1,22 @@
+<div class="container mt-4">
+    <h1>View Post</h1>
+    <div class="d-flex justify-content-end">
+        <a routerLink="/post/list" class="btn btn-primary mb-3" href="#">Back</a>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="mb-3">
+                <strong>ID:</strong>
+                <p class="card-text">{{ post.id }}</p>
+            </div>
+            <div class="mb-3">
+                <strong>Title:</strong>
+                <p class="card-text">{{ post.title }}</p>
+            </div> 
+            <div class="mb-3">
+                <strong>Body:</strong>
+                <p class="card-text">{{ post.body }}</p>
+            </div>  
+        </div>
+    </div>
+</div>
