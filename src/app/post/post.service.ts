@@ -38,13 +38,8 @@ export class PostService {
 
 // PAGINACION
 
-getPaginatedPosts(page: number, pageSize: number): Observable<any> {
-  // Configura los parámetros de la solicitud HTTP
-  let params = new HttpParams();
-  params = params.append('page', page.toString());
-  params = params.append('pageSize', pageSize.toString());
-
-  return this.httpClient.get(`${this.apiURL}/posts/`, { params: params })
+getPaginatedPosts(page: number, perPage: number): Observable<any> {
+  return this.httpClient.get(`${this.apiURL}/posts?_page=`+ page +`&_per_page=` + perPage, )
     .pipe(
       catchError(() => of(null))
     );

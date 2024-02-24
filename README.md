@@ -1,27 +1,55 @@
-# Blog
+# Estructura del Proyecto Blog CRUD
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.0.
+El proyecto se organiza en carpetas específicas para facilitar la gestión y el desarrollo de los componentes y servicios:
 
-## Development server
+- **`post`**: Carpeta destinada a alojar los componentes y servicios relacionados con las publicaciones del blog
+- **`shared`**: Carpeta para almacenar componentes, servicios y modelos que son compartidos y reutilizables en diferentes partes de la aplicación
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Componentes
 
-## Code scaffolding
+Los componentes se generan para manejar específicamente las funcionalidades del CRUD de las publicaciones del blog:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. **Páginas de la Aplicación:**
 
-## Build
+    - **Post List Page**: Lista todas las publicaciones disponibles
+    - **Post Detail Page**: Muestra los detalles de una publicación específica
+    - **Post Create Page**: Permite la creación de una nueva publicación
+    - **Post Edit Page**: Habilita la edición de una publicación existente
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+2. **Post Components:** 
 
-## Running unit tests
+    Componentes creados para cada acción del CRUD dentro de la gestión de publicaciones:
+    ```
+    ng generate component post/components/post-list
+    ng generate component post/components/post-detail
+    ng generate component post/components/post-create
+    ng generate component post/components/post-edit
+    ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Enrutamiento
 
-## Running end-to-end tests
+La configuración del enrutamiento se realiza en `app-routing.module.ts`, definiendo rutas específicas para facilitar la navegación entre las distintas páginas y componentes relacionados con el módulo CRUD
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Servicios y Modelos
 
-## Further help
+1. **Servicio `PostService`**: Encargado de consumir la API REST de JSONPlaceholder para realizar las operaciones CRUD sobre las publicaciones
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+2. **Interfaz `Post`**: Define la estructura de datos de una publicación, mejorando el manejo de estas dentro de la aplicación
+
+## Componente externo
+
+Uso de NgxPaginationModule para la paginacion, este modulo carga todo los datos y los va pasando de 10 en 10. Extraído de **https://www.npmjs.com/package/ngx-pagination**
+Otra opción es usar desde la API:
+
+```
+GET /posts?_page=1&_per_page=10
+```
+
+Por errores que no pude hacer funcionar, encontré la otra solución y la verdad, es un buen componente muy personalizable
+
+## Detalle de Publicación
+
+Se implementa una funcionalidad para visualizar los detalles de una publicación seleccionada, utilizando enlaces en la lista de publicaciones para acceder a sus detalles específicos, pasando el ID de la publicación por URL
+
+
+---

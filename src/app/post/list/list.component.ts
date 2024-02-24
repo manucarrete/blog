@@ -3,20 +3,19 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Post } from '../post';
 import { PostService } from '../post.service';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NgxPaginationModule],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css'
 })
 export class ListComponent {
   posts: Post[] = [];
-  currentPage = 1;
-  pageSize = 10;
-  totalPosts = 0;
-  postsPerPage = 10; 
+  public page: number = 1;
+  postsPerPage: number = 10; 
   
   constructor(public postService: PostService) { }
 
@@ -29,21 +28,22 @@ export class ListComponent {
          this.posts = this.posts.filter(item => item.id !== id);
     })
   }
-/*
-  loadPosts(): void{
-    this.postService.getPaginatedPosts(this.currentPage, this.postsPerPage).subscribe((data: Post[])=>{
-      this.posts = data;
-    }) 
-  }*/
-
   loadPosts(): void{
     this.postService.getAll().subscribe((data: Post[])=>{
       this.posts = data;
     }) 
   }
 
-  onChangePage(page: number) {
-    this.currentPage = page;
-    this.loadPosts();
+/* Esta sería la otra forma de paginar, pero no conseguia hacer funcionar el html
+  loadPosts(): void{
+    this.postService.getPaginatedPosts(this.page, this.postsPerPage).subscribe((data: Post[])=>{
+      this.posts = data;
+    }) 
   }
+
+  onChangePage(page: number) {
+    this.page = page;
+    console.log(page);
+    this.loadPosts();
+  }*/
 }
